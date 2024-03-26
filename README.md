@@ -322,6 +322,16 @@ In order to adjust vertical position pass `verticalOffset` to the `CopilotProvid
 <CopilotProvider verticalOffset={36}>
 ```
 
+This prop will apply the vertical offset globally to every step.
+
+Alternatively, you can also pass `verticalOffset` to the `CopilotStep` component to adjust the vertical position of the tooltip for a specific step.
+
+```js
+<CopilotStep text="This is a hello world example!" order={1} name="hello" verticalOffset={36}>
+  <CopilotText>Hello world!</CopilotText>
+</CopilotStep>
+```
+
 ### Triggering the tutorial
 
 Use `const {start} = useCopilot()` to trigger the tutorial. You can either invoke it with a touch event or in `useEffect` to start after the comopnent mounts. Note that the component and all its descendants must be mounted before starting the tutorial since the `CopilotStep`s need to be registered first.

@@ -91,7 +91,8 @@ export const CopilotProvider = ({
         width: size.width + OFFSET_WIDTH,
         height: size.height + OFFSET_WIDTH,
         x: size.x - OFFSET_WIDTH / 2,
-        y: size.y - OFFSET_WIDTH / 2 + verticalOffset,
+        // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+        y: size.y - OFFSET_WIDTH / 2 + (step.verticalOffset || verticalOffset),
       });
     },
     [verticalOffset]

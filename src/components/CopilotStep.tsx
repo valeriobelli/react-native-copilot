@@ -4,19 +4,21 @@ import { type NativeMethods } from "react-native";
 import { useCopilot } from "../contexts/CopilotProvider";
 
 interface Props {
+  active?: boolean;
+  children: React.ReactElement<any>;
   name: string;
   order: number;
   text: string;
-  children: React.ReactElement<any>;
-  active?: boolean;
+  verticalOffset?: number;
 }
 
 export const CopilotStep = ({
+  active = true,
+  children,
   name,
   order,
   text,
-  children,
-  active = true,
+  verticalOffset,
 }: Props) => {
   const registeredName = useRef<string | null>(null);
   const { registerStep, unregisterStep } = useCopilot();
@@ -55,16 +57,17 @@ export const CopilotStep = ({
         unregisterStep(registeredName.current);
       }
       registerStep({
-        name,
-        text,
-        order,
         measure,
-        wrapperRef,
+        name,
+        order,
+        text,
+        verticalOffset,
         visible: true,
+        wrapperRef,
       });
       registeredName.current = name;
     }
-  }, [name, order, text, registerStep, unregisterStep, active]);
+  }, [active, name, order, registerStep, text, unregisterStep, verticalOffset]);
 
   useEffect(() => {
     if (active) {
